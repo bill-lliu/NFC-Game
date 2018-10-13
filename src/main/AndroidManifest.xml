@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mishalarionov.nfc_game">
 
-
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
-    <uses-feature android:name="android.hardware.nfc.hce" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.nfc.hce"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.NFC" />
 
@@ -26,13 +29,15 @@
         </activity>
         <activity android:name=".GameActivity">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity android:name=".HostGameActivity"></activity>
     </application>
 
 </manifest>

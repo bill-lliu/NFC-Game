@@ -30,12 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-    private void launchGameActivity() {
-        Intent intent = new Intent(this, GameActivity.class);
-        //intent.putExtra() might also go here
-        startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mEmailField = findViewById(R.id.emailEditText);
         mPasswordField = findViewById(R.id.passwordEditText);
         //buttons
-        findViewById(R.id.emailSignInButton).setOnClickListener(this);
+        findViewById(R.id.joinSignInButton).setOnClickListener(this);
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
         //updateUI(currentUser);
     }
@@ -82,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            launchGameActivity();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -99,29 +92,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // [END create_user_with_email]
     }
 
-    protected void signIn(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            Toast.makeText(MainActivity.this,
-                                    "Signed in as " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                            launchGameActivity();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+    protected boolean signIn(String email, String password){
+        if (!email.equals("") && !password.equals("")) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                                Toast.makeText(MainActivity.this,
+                                        "Signed in as " + user.getEmail(),
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(MainActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
                         }
-                    }
-                });
+                    });
+        }
+        return false;
     }
 
     protected FirebaseUser getCurrentUser(){
@@ -156,10 +151,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int i = v.getId();
         if (i == R.id.emailCreateAccountButton) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.emailSignInButton) {
-            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.signOutButton) {
-            signOut();
+        } else if (i == R.id.joinSignInButton) {
+            if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
+                Intent intent = new Intent(this, GameActivity.class);
+                //intent.putExtra("", ""); //might also go here
+                startActivity(intent);
+            }
+        } else if (i == R.id.hostSignInButton) {
+            if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
+                Intent intent = new Intent(this, HostGameActivity.class);
+                //intent.putExtra("", ""); //might also go here
+                startActivity(intent);
+            }
         }
 //        else if (i == R.id.verifyEmailButton) {
 //            sendEmailVerification();
@@ -170,41 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onResume() {
         super.onResume();
         Log.d("Intent: ", String.valueOf(getIntent()));
-    }
-
-
-    private void sendEmailVerification() {
-         /*
-        do not want
-        // Disable button
-        findViewById(R.id.verifyEmailButton).setEnabled(false);
-
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
-                        // Re-enable button
-                        findViewById(R.id.verifyEmailButton).setEnabled(true);
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(MainActivity.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END send_email_verification]
-        */
     }
 
     private void signOut() {

@@ -19,24 +19,24 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static android.nfc.NdefRecord.createMime;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener, NfcAdapter.CreateNdefMessageCallback {
+public class GameActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback {
 
     private EditText beamText;
     private TextView incomingText;
-    private Button beamButton;
     private NfcAdapter nfcAdapter;
-
+    private FirebaseUser currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+
         //Make sure the user is authenticated
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //Kick out unauthenticated users
-        if (user == null) {
+        if (currentUser == null) {
             //Start MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -44,23 +44,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         //Find the appropriate buttons
         beamText = findViewById(R.id.beamText);
-        beamButton = findViewById(R.id.beamButton); //This is just for testing rn, todo replace
 
         //Initialize the NFC adapter
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         nfcAdapter.setNdefPushMessageCallback(this, this);
 
-        beamButton.setOnClickListener(this);
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.beamButton) {
-            String sendText = String.valueOf(beamText.getText());
-
-        }
     }
 
     @Override
