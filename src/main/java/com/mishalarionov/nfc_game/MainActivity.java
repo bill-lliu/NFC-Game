@@ -152,12 +152,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (i == R.id.emailCreateAccountButton) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.joinSignInButton) {
+            //Make sure the sign in is successful, then launch game as client
             if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
                 Intent intent = new Intent(this, GameActivity.class);
                 //intent.putExtra("", ""); //might also go here
                 startActivity(intent);
             }
         } else if (i == R.id.hostSignInButton) {
+            //Make sure the sign in is successful, then launch game as host
             if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
                 Intent intent = new Intent(this, HostGameActivity.class);
                 //intent.putExtra("", ""); //might also go here
