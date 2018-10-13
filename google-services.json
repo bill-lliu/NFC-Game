@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "957312153000",
+    "firebase_url": "https://nfc-game-933e3.firebaseio.com",
+    "project_id": "nfc-game-933e3",
+    "storage_bucket": "nfc-game-933e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957312153000:android:5873e90e60ada337",
+        "android_client_info": {
+          "package_name": "com.mishalarionov.nfc_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957312153000-tebma074l37qnumpra974iqlrvj1rh9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mishalarionov.nfc_game",
+            "certificate_hash": "b51769def7d288a0f85a051b377ed4b6cfc07887"
+          }
+        },
+        {
+          "client_id": "957312153000-enndn3mmgc9arob382qbsb17mip2202s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbhwMh4Q5edH-Xf7JIGTVKRJvhhZCSzI0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957312153000-enndn3mmgc9arob382qbsb17mip2202s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
