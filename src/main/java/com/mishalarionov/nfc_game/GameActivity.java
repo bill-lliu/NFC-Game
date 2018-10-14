@@ -90,4 +90,14 @@ public class GameActivity extends AppCompatActivity { //implements NfcAdapter.Cr
         setIntent(intent);
     }
 
+    public int faceOff(boolean myValue, boolean oppValue, String oppID){
+        if (myValue == false && oppValue == false){
+            return 50;
+        } else if (myValue == true && oppValue == false && this.getTargetID() == oppID) {
+            return 300;
+        } else if (){
+            you know im kinda really tired and i cant code, yall went to sleep so imma just do the devpost and see how it goes
+        }
+    }
+
 }
