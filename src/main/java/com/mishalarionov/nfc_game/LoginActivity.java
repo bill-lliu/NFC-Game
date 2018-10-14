@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "EmailPassword";
 
     private TextView mStatusTextView;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                             Toast.makeText(MainActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
+                             Toast.makeText(LoginActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
                                 Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -109,14 +109,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
-                                Toast.makeText(MainActivity.this,
+                                Toast.makeText(LoginActivity.this,
                                         "Signed in as " + user.getEmail(),
                                         Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(MainActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
+                                Toast.makeText(LoginActivity.this, "Authentication failed.", //*************NO ONE NEEDS A TOAST MATE ************** jk its just a notifcation panel but we dont know what enclosing classes are oop
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString(), intent);
         } else if (i == R.id.hostSignInButton) {
             //Make sure the sign in is successful, then launch game as host
-            Intent intent = new Intent(this, HostGameActivity.class);
+            Intent intent = new Intent(this, HostRecruitActivity.class);
             //intent.putExtra("", ""); //might also go here
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString(), intent);
         }
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void signOut() {
         mAuth.signOut();
-        Toast.makeText(MainActivity.this,
+        Toast.makeText(LoginActivity.this,
                 "Signed out",
                 Toast.LENGTH_SHORT).show();
         updateUI(null);
