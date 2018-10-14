@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static android.nfc.NdefRecord.createMime;
 
-public class GameActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback {
+public class GameActivity extends AppCompatActivity { //implements NfcAdapter.CreateNdefMessageCallback {
 
     private EditText beamText;
     private TextView incomingText;
@@ -48,28 +48,28 @@ public class GameActivity extends AppCompatActivity implements NfcAdapter.Create
         //Find the appropriate buttons
         beamText = findViewById(R.id.beamText);
 
-        //Initialize the NFC adapter
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
-        nfcAdapter.setNdefPushMessageCallback(this, this);
+//        //Initialize the NFC adapter
+//        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+//
+//        nfcAdapter.setNdefPushMessageCallback(this, this);
 
 
     }
 
-    @Override
-    public NdefMessage createNdefMessage(NfcEvent event) {
-        String sendText = String.valueOf(beamText.getText());
-        NdefMessage msg = new NdefMessage(
-                new NdefRecord[]{
-                        createMime("text/html", sendText.getBytes())
-                        //,NdefRecord.createApplicationRecord("com.mishalarionov.nfc_game")
-                }
-        );
-        if (sendText.length() == 0) { //Check if we don't have anything to beam
-            return null;
-        }
-        return msg;
-    }
+//    @Override
+//    public NdefMessage createNdefMessage(NfcEvent event) {
+//        String sendText = String.valueOf(beamText.getText());
+//        NdefMessage msg = new NdefMessage(
+//                new NdefRecord[]{
+//                        createMime("text/plain", sendText.getBytes())
+//                        //,NdefRecord.createApplicationRecord("com.mishalarionov.nfc_game")
+//                }
+//        );
+//        if (sendText.length() == 0) { //Check if we don't have anything to beam
+//            return null;
+//        }
+//        return msg;
+//    }
 
     @Override
     public void onResume() {
