@@ -41,7 +41,7 @@ public class OpenScreen extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v){
         int i = v.getId();
         if (i == R.id.joinButton) {
-            new Intent(this, )
+            new Intent(this, HostRecruitActivity.class);
         } else if (i == R.id.hostButton) {
             //Make sure the sign in is successful, then launch game as client
             Intent intent = new Intent(this, HostStartGameActivity.class);
