@@ -1,6 +1,5 @@
 package com.mishalarionov.nfc_game;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
