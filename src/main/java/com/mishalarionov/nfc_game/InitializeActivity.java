@@ -20,7 +20,7 @@ public class InitializeActivity extends AppCompatActivity implements View.OnClic
         final String question1;
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("server/"); //WHAT IS OUR SERVER?
+        DatabaseReference ref = database.getReference("server/games/questions"); //WHAT IS OUR SERVER?
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
