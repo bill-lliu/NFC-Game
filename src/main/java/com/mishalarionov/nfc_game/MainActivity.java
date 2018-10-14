@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPasswordField = findViewById(R.id.passwordEditText);
         //buttons
         findViewById(R.id.joinSignInButton).setOnClickListener(this);
+        findViewById(R.id.hostSignInButton).setOnClickListener(this);
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
         //updateUI(currentUser);
     }
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
         }
-        return false;
+        return getCurrentUser() != null ;
     }
 
     protected FirebaseUser getCurrentUser(){
