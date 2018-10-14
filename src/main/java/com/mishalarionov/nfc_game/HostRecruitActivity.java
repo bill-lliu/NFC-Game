@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +24,7 @@ import java.util.Objects;
 
 import static android.nfc.NdefRecord.createMime;
 
-public class HostGameActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback {
+public class HostRecruitActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback {
 
     Map<String, Object> game;
     FirebaseDatabase database;
@@ -46,8 +45,8 @@ public class HostGameActivity extends AppCompatActivity implements NfcAdapter.Cr
 
         //Kick out unauthenticated users
         if (currentUser == null) {
-            //Start MainActivity
-            Intent intent = new Intent(this, MainActivity.class);
+            //Start LoginActivity
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
