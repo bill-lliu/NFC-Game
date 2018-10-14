@@ -8,6 +8,7 @@ import android.nfc.NfcEvent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,8 @@ public class GameActivity extends AppCompatActivity implements NfcAdapter.Create
         //Make sure the user is authenticated
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        Log.d("What", currentUser.getEmail());
+
         //Kick out unauthenticated users
         if (currentUser == null) {
             //Start MainActivity
@@ -58,7 +61,7 @@ public class GameActivity extends AppCompatActivity implements NfcAdapter.Create
         String sendText = String.valueOf(beamText.getText());
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[]{
-                        createMime("text/plain", sendText.getBytes())
+                        createMime("text/html", sendText.getBytes())
                         //,NdefRecord.createApplicationRecord("com.mishalarionov.nfc_game")
                 }
         );

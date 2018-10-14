@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         //Initialize the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
+
+        //Make sure the user starts signed out
+        mAuth.signOut();
+
         //Check if the user is signed in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //views
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // [END create_user_with_email]
     }
 
-    protected boolean signIn(String email, String password){
+    protected void signIn(String email, String password, final Intent intent){
         if (!email.equals("") && !password.equals("")) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this,
                                         "Signed in as " + user.getEmail(),
                                         Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -117,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
         }
-        return getCurrentUser() != null ;
     }
 
     protected FirebaseUser getCurrentUser(){
@@ -154,18 +158,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.joinSignInButton) {
             //Make sure the sign in is successful, then launch game as client
-            if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
-                Intent intent = new Intent(this, GameActivity.class);
-                //intent.putExtra("", ""); //might also go here
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, GameActivity.class);
+            //intent.putExtra("", ""); //might also go here
+            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString(), intent);
         } else if (i == R.id.hostSignInButton) {
             //Make sure the sign in is successful, then launch game as host
-            if(signIn(mEmailField.getText().toString(), mPasswordField.getText().toString())) {
-                Intent intent = new Intent(this, HostGameActivity.class);
-                //intent.putExtra("", ""); //might also go here
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, HostGameActivity.class);
+            //intent.putExtra("", ""); //might also go here
+            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString(), intent);
         }
 //        else if (i == R.id.verifyEmailButton) {
 //            sendEmailVerification();
