@@ -19,5 +19,5 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hackButton"/>
-    
+
 </android.support.constraint.ConstraintLayout>
