@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HostGameActivity"
+    tools:context=".HostRecruitActivity"
     android:layout_margin="20dp">
 
     <TextView
@@ -28,6 +28,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         >
+        <LinearLayout
+            android:id="@+id/hostLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
     </ScrollView>
 
@@ -38,5 +45,44 @@
         android:text="START GAME"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="301dp"
+        android:layout_height="30dp"
+        android:text="Please enter 3 questions to ask your players"
+        app:layout_constraintTop_toBottomOf="@+id/hostTitleText"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/question1Field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Question 1"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instructions" />
+
+    <EditText
+        android:id="@+id/question2Field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Question 2"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question1Field" />
+
+    <EditText
+        android:id="@+id/question3Field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Question 3"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question2Field" />
 
 </android.support.constraint.ConstraintLayout>

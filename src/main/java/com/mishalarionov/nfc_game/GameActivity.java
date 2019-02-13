@@ -2,24 +2,18 @@ package com.mishalarionov.nfc_game;
 
 import android.content.Intent;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static android.nfc.NdefRecord.createMime;
-
-public class GameActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback {
+public class GameActivity extends AppCompatActivity { //implements NfcAdapter.CreateNdefMessageCallback {
 
     private EditText beamText;
     private TextView incomingText;
@@ -35,38 +29,40 @@ public class GameActivity extends AppCompatActivity implements NfcAdapter.Create
         //Make sure the user is authenticated
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        Log.d("What", currentUser.getEmail());
+
         //Kick out unauthenticated users
         if (currentUser == null) {
-            //Start MainActivity
-            Intent intent = new Intent(this, MainActivity.class);
+            //Start LoginActivity
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
         //Find the appropriate buttons
         beamText = findViewById(R.id.beamText);
 
-        //Initialize the NFC adapter
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
-        nfcAdapter.setNdefPushMessageCallback(this, this);
+//        //Initialize the NFC adapter
+//        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+//
+//        nfcAdapter.setNdefPushMessageCallback(this, this);
 
 
     }
 
-    @Override
-    public NdefMessage createNdefMessage(NfcEvent event) {
-        String sendText = String.valueOf(beamText.getText());
-        NdefMessage msg = new NdefMessage(
-                new NdefRecord[]{
-                        createMime("text/plain", sendText.getBytes())
-                        //,NdefRecord.createApplicationRecord("com.mishalarionov.nfc_game")
-                }
-        );
-        if (sendText.length() == 0) { //Check if we don't have anything to beam
-            return null;
-        }
-        return msg;
-    }
+//    @Override
+//    public NdefMessage createNdefMessage(NfcEvent event) {
+//        String sendText = String.valueOf(beamText.getText());
+//        NdefMessage msg = new NdefMessage(
+//                new NdefRecord[]{
+//                        createMime("text/plain", sendText.getBytes())
+//                        //,NdefRecord.createApplicationRecord("com.mishalarionov.nfc_game")
+//                }
+//        );
+//        if (sendText.length() == 0) { //Check if we don't have anything to beam
+//            return null;
+//        }
+//        return msg;
+//    }
 
     @Override
     public void onResume() {
@@ -92,6 +88,16 @@ public class GameActivity extends AppCompatActivity implements NfcAdapter.Create
     public void onNewIntent(Intent intent) {
         // onResume gets called after this to handle the intent
         setIntent(intent);
+    }
+
+    public int faceOff(boolean myValue, boolean oppValue, String oppID){
+        if (myValue == false && oppValue == false){
+            return 50;
+        } else if (myValue == true && oppValue == false && this.getTargetID() == oppID) {
+            return 300;
+        } else if (){
+            you know im kinda really tired and i cant code, yall went to sleep so imma just do the devpost and see how it goes
+        }
     }
 
 }
